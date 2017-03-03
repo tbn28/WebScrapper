@@ -1,0 +1,659 @@
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">MeScrapper.R</h1>
+<h4 class="author"><em>Tomasz Bukowski</em></h4>
+<h4 class="date"><em>Fri Jan 20 12:24:53 2017</em></h4>
+
+</div>
+
+
+<pre class="r"><code>library(rvest)</code></pre>
+<pre><code>## Warning: package 'rvest' was built under R version 3.3.2</code></pre>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre><code>## Warning: package 'xml2' was built under R version 3.3.2</code></pre>
+<pre class="r"><code>library(stringr)</code></pre>
+<pre><code>## Warning: package 'stringr' was built under R version 3.3.2</code></pre>
+<pre class="r"><code>container&lt;-data.frame()
+
+for (a in 2:2) { # dane ze strony
+  
+  url1&lt;-&quot;https://www.pracuj.pl/praca/Hadoop;kw&quot;
+  url&lt;-paste(url1,a,sep = &quot;&quot;) # łączenie linku z numerem strony
+  link &lt;- read_html(url) # czytanie kodu html strony
+  h&lt;-html_nodes(link,'h2 [itemprop=&quot;title&quot;]') # czytanie wartosci ze strony html
+  dane&lt;-html_text(h) # konwersja kodu na tekst
+  for (i in 1:length(dane)) { # iteracja po kolejnych ofertach na stronie
+    container[i+(10*(a-2)),1]&lt;-dane[i] # zapisywanie wynikow do data.frame
+  }
+}
+
+container[,1] #wyświetlanie</code></pre>
+<pre><code>##  [1] &quot;PHP Developer&quot;                                                                                     
+##  [2] &quot;PHP Developer&quot;                                                                                     
+##  [3] &quot;Senior Statistician In Advanced Analytics (M/f) &quot;                                                  
+##  [4] &quot;Specjalista ds. controllingu i zarządzania ryzykiem operacyjnym&quot;                                   
+##  [5] &quot;Advanced Analytics Manager (M/f) &quot;                                                                 
+##  [6] &quot;Front-end developer&quot;                                                                               
+##  [7] &quot;Teaching Assistant&quot;                                                                                
+##  [8] &quot;Administrative Assistant&quot;                                                                          
+##  [9] &quot;Dyspozytor&quot;                                                                                        
+## [10] &quot;Operator Wózka Widłowego – Pracownik Magazynowy&quot;                                                   
+## [11] &quot;Front - end Developer - Digital Banking Area&quot;                                                      
+## [12] &quot;Inżynier Procesu&quot;                                                                                  
+## [13] &quot;Key Account Manager&quot;                                                                               
+## [14] &quot;Specjalista ds. administracji sprzedaży&quot;                                                           
+## [15] &quot;Manager ds. Sprzedaży Usług Medycznych&quot;                                                            
+## [16] &quot;Customer Service Advisor With Danish/swedish (M/f) &quot;                                               
+## [17] &quot;Księgowa&quot;                                                                                          
+## [18] &quot;Asystentka ds. Administracji i Koordynacji Biura&quot;                                                  
+## [19] &quot;Senior Laboratory Chemist&quot;                                                                         
+## [20] &quot;Architect (JAVA) Digital Solutions - Banking Area&quot;                                                 
+## [21] &quot;Główny księgowy&quot;                                                                                   
+## [22] &quot;Senior Art Director&quot;                                                                               
+## [23] &quot;Starszy Konsultant Podatkowy - Doradca Podatkowy&quot;                                                  
+## [24] &quot;Specjalista ds. Planowania i Gospodarki Przestrzennej w Biurze Morskiej Energetyki Wiatrowej&quot;      
+## [25] &quot;Specjalista ds. Systemów Podłogowych&quot;                                                              
+## [26] &quot;Sekretarka&quot;                                                                                        
+## [27] &quot;Specjalista ds. Jakości i BHP (M/f) &quot;                                                              
+## [28] &quot;Kierowca - Serwisant transformatorów&quot;                                                              
+## [29] &quot;Przedstawiciel Handlowy ds. Samochodów Używanych ze znajomością języka serbskiego lub chorwackiego&quot;
+## [30] &quot;Specjalista Utrzymania Ruchu - Automatyk&quot;                                                          
+## [31] &quot;Senior Engineer (Contact Centre Value Added Services)&quot;                                             
+## [32] &quot;Javascript Frontend Developer&quot;                                                                     
+## [33] &quot;Kierownik Zespołu Mobilnych Doradców ds. Pozyskiwania Klientów&quot;                                    
+## [34] &quot;Przedstawiciel Handlowy&quot;                                                                           
+## [35] &quot;Pracownik budowlany&quot;                                                                               
+## [36] &quot;Monter Dźwigników Platformowych&quot;                                                                   
+## [37] &quot;Doradca Techniczno-Handlowy&quot;                                                                       
+## [38] &quot;Specjalista ds. Produktów Inwestycyjnych&quot;                                                          
+## [39] &quot;Inżynier ds. Zapewnienia Jakości Dostawców (SQA)&quot;                                                  
+## [40] &quot;Operator maszyn CNC - Stolarz&quot;                                                                     
+## [41] &quot;Specjalista ds. podatkowych&quot;                                                                       
+## [42] &quot;Dyspozytor w transporcie międzynarodowym &quot;                                                         
+## [43] &quot;Referent ds. inwestycji&quot;                                                                           
+## [44] &quot;Inżynier procesu - technolog&quot;                                                                      
+## [45] &quot;Regionalny Menadżer Sprzedaży Ubezpieczeń Indywidualnych na Życie&quot;                                 
+## [46] &quot;Junior Copywriter&quot;                                                                                 
+## [47] &quot;Specjalista ds. prawnych&quot;                                                                          
+## [48] &quot;Kontroler Jakości&quot;                                                                                 
+## [49] &quot;Magazynier&quot;                                                                                        
+## [50] &quot;Specjalista ds. Rekrutacji&quot;</code></pre>
+<pre class="r"><code>for (a in 2:2) {
+  url1&lt;-&quot;https://www.pracuj.pl/praca/Hadoop;kw&quot;
+  url&lt;-paste(url1,a,sep = &quot;&quot;)
+  link &lt;- read_html(url)
+  h&lt;-html_nodes(link,'h3 [itemprop=&quot;name&quot;]')
+  dane&lt;-html_text(h)
+  for (i in 1:length(dane)) {
+    container[i+(10*(a-2)),2]&lt;-dane[i]
+  }
+}
+
+container[,2]</code></pre>
+<pre><code>##  [1] &quot;EUVIC Sp. z o.o&quot;                                       
+##  [2] &quot;EUVIC Sp. z o.o&quot;                                       
+##  [3] &quot;Page Personnel&quot;                                        
+##  [4] &quot;mBank S.A.&quot;                                            
+##  [5] &quot;PageGroup Polska&quot;                                      
+##  [6] &quot;SkyGate &quot;                                              
+##  [7] &quot;The British School Sp. z o.o.&quot;                         
+##  [8] &quot;Franklin Templeton Investments Poland Sp. z o.o.&quot;      
+##  [9] &quot;Portmann Logistic Polska Sp. z o.o.&quot;                   
+## [10] &quot;Sonko Sp. z o.o.&quot;                                      
+## [11] &quot;EY (dawniej Ernst &amp; Young)&quot;                            
+## [12] &quot;TRUMPF Huettinger Sp. z o.o.&quot;                          
+## [13] &quot;Kilargo&quot;                                               
+## [14] &quot;TRUMPF Huettinger Sp. z o.o.&quot;                          
+## [15] &quot;LUX MED Sp. z o.o.&quot;                                    
+## [16] &quot;Page Personnel&quot;                                        
+## [17] &quot;Instytut Pamięci Narodowej KŚZpNP Oddział w Szczecinie&quot;
+## [18] &quot;Omnicorp Sp. z o.o.&quot;                                   
+## [19] &quot;CRH Lab Sp. z o.o.&quot;                                    
+## [20] &quot;EY (dawniej Ernst &amp; Young)&quot;                            
+## [21] &quot;CEWE Sp. z o.o.&quot;                                       
+## [22] &quot;OS3 Sp. z o.o.&quot;                                        
+## [23] &quot;Rödl &amp; Partner&quot;                                        
+## [24] &quot;PGE Energia Odnawialna S.A.&quot;                           
+## [25] &quot;Knauf&quot;                                                 
+## [26] &quot;TOOLMAX Spółka z o.o.&quot;                                 
+## [27] &quot;Page Personnel&quot;                                        
+## [28] &quot;ZREW Transformatory S.A.&quot;                              
+## [29] &quot;KTS Holding Sp. z o.o. &quot;                               
+## [30] &quot;Barona HR Services Sp. z o.o.&quot;                         
+## [31] &quot;Dimension Data Polska sp. z o.o.&quot;                      
+## [32] &quot;NaviExpert Sp. z o.o.&quot;                                 
+## [33] &quot;Idea Bank SA&quot;                                          
+## [34] &quot;Mondelez International w Polsce&quot;                       
+## [35] &quot;G&amp;W Servicegesellschaft mbH&quot;                           
+## [36] &quot;Columbus McKinnon Polska Sp. z o.o.&quot;                   
+## [37] &quot;Columbus McKINNON Polska Sp. z o.o.&quot;                   
+## [38] &quot;Idea Bank SA&quot;                                          
+## [39] &quot;Devonshire&quot;                                            
+## [40] &quot;Massoni Sp. z o.o.&quot;                                    
+## [41] &quot;Can-Pack SA&quot;                                           
+## [42] &quot;Ando &quot;                                                 
+## [43] &quot;Rekrutacja ukryta&quot;                                     
+## [44] &quot;Grafton Recruitment&quot;                                   
+## [45] &quot;TUnŻ WARTA S.A.&quot;                                       
+## [46] &quot;B.P.O. Poland &quot;                                        
+## [47] &quot;Can-Pack SA&quot;                                           
+## [48] &quot;WELDSTAL sp. z o.o. sp.k.&quot;                             
+## [49] &quot;Tesco Polska &quot;                                         
+## [50] &quot;Tesco Polska &quot;</code></pre>
+<pre class="r"><code>for (a in 2:2) {
+  url1&lt;-&quot;https://www.pracuj.pl/praca/Hadoop;kw&quot;
+  url&lt;-paste(url1,a,sep = &quot;&quot;)
+  link &lt;- read_html(url)
+  h&lt;-html_nodes(link,'span [itemprop=&quot;addressRegion&quot;]')
+  dane&lt;-html_text(h)
+  for (i in 1:length(dane)) {
+    container[i+(10*(a-2)),3]&lt;-dane[i]
+  }
+}
+
+a&lt;-sample(3000:15000,51)
+#a
+
+for (s in 1:40) {
+  container[s,4]&lt;-a[s]
+}
+
+
+container[,3]</code></pre>
+<pre><code>##  [1] &quot; Warszawa, mazowieckie &quot;                                                              
+##  [2] &quot; Gliwice, śląskie &quot;                                                                   
+##  [3] &quot; Warszawa, mazowieckie &quot;                                                              
+##  [4] &quot; Poznań, wielkopolskie &quot;                                                              
+##  [5] &quot; Warszawa, mazowieckie &quot;                                                              
+##  [6] &quot; Bielany Wrocławskie (pow. wrocławski), dolnośląskie &quot;                                
+##  [7] &quot; Warszawa, mazowieckie &quot;                                                              
+##  [8] &quot; Warszawa (okolice), Zielonka, mazowieckie &quot;                                          
+##  [9] &quot; Łódź, łódzkie &quot;                                                                      
+## [10] &quot; Warszawa (okolice), Zielonka, mazowieckie &quot;                                          
+## [11] &quot; Katowice, śląskie &quot;                                                                  
+## [12] &quot; Warszawa, mazowieckie &quot;                                                              
+## [13] &quot; Szczecin, zachodniopomorskie &quot;                                                       
+## [14] &quot; Szczecin, zachodniopomorskie &quot;                                                       
+## [15] &quot; Ożarów, świętokrzyskie &quot;                                                             
+## [16] &quot; Warszawa, mazowieckie &quot;                                                              
+## [17] &quot; Kędzierzyn-Koźle, opolskie &quot;                                                         
+## [18] &quot; Warszawa, mazowieckie &quot;                                                              
+## [19] &quot; Bydgoszcz (okolice), Białe Błota (pow. bydgoski), kujawsko-pomorskie &quot;               
+## [20] &quot; Warszawa, mazowieckie &quot;                                                              
+## [21] &quot; Łódź, łódzkie &quot;                                                                      
+## [22] &quot; Warszawa, mazowieckie &quot;                                                              
+## [23] &quot; Starogard Gdański, pomorskie &quot;                                                       
+## [24] &quot; Warszawa, mazowieckie &quot;                                                              
+## [25] &quot; Poznań, wielkopolskie &quot;                                                              
+## [26] &quot; Ełk, Giżycko (okolice), Kętrzyn, Mikołajki, Mrągowo, Węgorzewo, warmińsko-mazurskie &quot;
+## [27] &quot; Burgdorf, Kreis Hannover, Niemcy &quot;                                                   
+## [28] &quot; Poznań, wielkopolskie &quot;                                                              
+## [29] &quot; Poznań, Plewiska (pow. poznański), wielkopolskie &quot;                                   
+## [30] &quot; Warszawa, mazowieckie &quot;                                                              
+## [31] &quot; Sulęcin, lubuskie &quot;                                                                  
+## [32] &quot; Bielsko-Biała, śląskie &quot;                                                             
+## [33] &quot; Kraków, małopolskie &quot;                                                                
+## [34] &quot; Bydgoszcz, kujawsko-pomorskie &quot;                                                      
+## [35] &quot; Jaworzno, śląskie &quot;                                                                  
+## [36] &quot; Bielsko-Biała, Tychy, śląskie &quot;                                                      
+## [37] &quot; Koszalin, zachodniopomorskie &quot;                                                       
+## [38] &quot; Warszawa, mazowieckie &quot;                                                              
+## [39] &quot; Kraków, małopolskie &quot;                                                                
+## [40] &quot; Wałbrzych, dolnośląskie &quot;                                                            
+## [41] &quot; Poznań, wielkopolskie &quot;                                                              
+## [42] &quot; Kraków, małopolskie &quot;                                                                
+## [43] &quot; Kraków, małopolskie &quot;                                                                
+## [44] &quot; Kraków, małopolskie &quot;                                                                
+## [45] &quot; Warszawa, mazowieckie &quot;                                                              
+## [46] &quot; Wrocław, dolnośląskie &quot;                                                              
+## [47] &quot; Warszawa, mazowieckie &quot;                                                              
+## [48] NA                                                                                     
+## [49] NA                                                                                     
+## [50] NA</code></pre>
+<pre class="r"><code>hist(container[,4],col = rainbow(8),xlab = &quot;Pensja&quot;, ylab = &quot;Częstotliwosc&quot;,main = &quot;Histogram&quot;)</code></pre>
+<p><img src="data:image/png;base64,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gA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICADiSgAQENCGibnmlHDgjoQAIaENCAgLbpmXbkgIAOJKABAQ0IaJueaUcOCOhAAhoQ0ICAtumZduSAgA4koAEBDQhom55pRw4I6EACGhDQgIC26Zl25ICA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" width="672" /></p>
+<pre class="r"><code>##geocodes&lt;-geocode(flokalizacje, output=&quot;latlona&quot;)
+
+##leaflet(geocodes) %&gt;% addTiles() %&gt;%
+ ## addMarkers(~lon, ~lat, popup = ~as.character(foferty))
+
+colnames(container)&lt;-c(&quot;Praca&quot;,&quot;Firma&quot;,&quot;Lokalizacja&quot;,&quot;Wynagrodzenie&quot;)
+
+write.csv(container, file = &quot;F:/SC/Plik_CSV1.csv&quot;,row.names=FALSE)
+
+data &lt;- read.csv(file = &quot;F:/SC/Plik_CSV1.csv&quot;)
+
+container</code></pre>
+<pre><code>##                                                                                                 Praca
+## 1                                                                                       PHP Developer
+## 2                                                                                       PHP Developer
+## 3                                                    Senior Statistician In Advanced Analytics (M/f) 
+## 4                                     Specjalista ds. controllingu i zarządzania ryzykiem operacyjnym
+## 5                                                                   Advanced Analytics Manager (M/f) 
+## 6                                                                                 Front-end developer
+## 7                                                                                  Teaching Assistant
+## 8                                                                            Administrative Assistant
+## 9                                                                                          Dyspozytor
+## 10                                                    Operator Wózka Widłowego – Pracownik Magazynowy
+## 11                                                       Front - end Developer - Digital Banking Area
+## 12                                                                                   Inżynier Procesu
+## 13                                                                                Key Account Manager
+## 14                                                            Specjalista ds. administracji sprzedaży
+## 15                                                             Manager ds. Sprzedaży Usług Medycznych
+## 16                                                Customer Service Advisor With Danish/swedish (M/f) 
+## 17                                                                                           Księgowa
+## 18                                                   Asystentka ds. Administracji i Koordynacji Biura
+## 19                                                                          Senior Laboratory Chemist
+## 20                                                  Architect (JAVA) Digital Solutions - Banking Area
+## 21                                                                                    Główny księgowy
+## 22                                                                                Senior Art Director
+## 23                                                   Starszy Konsultant Podatkowy - Doradca Podatkowy
+## 24       Specjalista ds. Planowania i Gospodarki Przestrzennej w Biurze Morskiej Energetyki Wiatrowej
+## 25                                                               Specjalista ds. Systemów Podłogowych
+## 26                                                                                         Sekretarka
+## 27                                                               Specjalista ds. Jakości i BHP (M/f) 
+## 28                                                               Kierowca - Serwisant transformatorów
+## 29 Przedstawiciel Handlowy ds. Samochodów Używanych ze znajomością języka serbskiego lub chorwackiego
+## 30                                                           Specjalista Utrzymania Ruchu - Automatyk
+## 31                                              Senior Engineer (Contact Centre Value Added Services)
+## 32                                                                      Javascript Frontend Developer
+## 33                                     Kierownik Zespołu Mobilnych Doradców ds. Pozyskiwania Klientów
+## 34                                                                            Przedstawiciel Handlowy
+## 35                                                                                Pracownik budowlany
+## 36                                                                    Monter Dźwigników Platformowych
+## 37                                                                        Doradca Techniczno-Handlowy
+## 38                                                           Specjalista ds. Produktów Inwestycyjnych
+## 39                                                   Inżynier ds. Zapewnienia Jakości Dostawców (SQA)
+## 40                                                                      Operator maszyn CNC - Stolarz
+## 41                                                                        Specjalista ds. podatkowych
+## 42                                                          Dyspozytor w transporcie międzynarodowym 
+## 43                                                                            Referent ds. inwestycji
+## 44                                                                       Inżynier procesu - technolog
+## 45                                  Regionalny Menadżer Sprzedaży Ubezpieczeń Indywidualnych na Życie
+## 46                                                                                  Junior Copywriter
+## 47                                                                           Specjalista ds. prawnych
+## 48                                                                                  Kontroler Jakości
+## 49                                                                                         Magazynier
+## 50                                                                         Specjalista ds. Rekrutacji
+##                                                     Firma
+## 1                                         EUVIC Sp. z o.o
+## 2                                         EUVIC Sp. z o.o
+## 3                                          Page Personnel
+## 4                                              mBank S.A.
+## 5                                        PageGroup Polska
+## 6                                                SkyGate 
+## 7                           The British School Sp. z o.o.
+## 8        Franklin Templeton Investments Poland Sp. z o.o.
+## 9                     Portmann Logistic Polska Sp. z o.o.
+## 10                                       Sonko Sp. z o.o.
+## 11                             EY (dawniej Ernst &amp; Young)
+## 12                           TRUMPF Huettinger Sp. z o.o.
+## 13                                                Kilargo
+## 14                           TRUMPF Huettinger Sp. z o.o.
+## 15                                     LUX MED Sp. z o.o.
+## 16                                         Page Personnel
+## 17 Instytut Pamięci Narodowej KŚZpNP Oddział w Szczecinie
+## 18                                    Omnicorp Sp. z o.o.
+## 19                                     CRH Lab Sp. z o.o.
+## 20                             EY (dawniej Ernst &amp; Young)
+## 21                                        CEWE Sp. z o.o.
+## 22                                         OS3 Sp. z o.o.
+## 23                                         Rödl &amp; Partner
+## 24                            PGE Energia Odnawialna S.A.
+## 25                                                  Knauf
+## 26                                  TOOLMAX Spółka z o.o.
+## 27                                         Page Personnel
+## 28                               ZREW Transformatory S.A.
+## 29                                KTS Holding Sp. z o.o. 
+## 30                          Barona HR Services Sp. z o.o.
+## 31                       Dimension Data Polska sp. z o.o.
+## 32                                  NaviExpert Sp. z o.o.
+## 33                                           Idea Bank SA
+## 34                        Mondelez International w Polsce
+## 35                            G&amp;W Servicegesellschaft mbH
+## 36                    Columbus McKinnon Polska Sp. z o.o.
+## 37                    Columbus McKINNON Polska Sp. z o.o.
+## 38                                           Idea Bank SA
+## 39                                             Devonshire
+## 40                                     Massoni Sp. z o.o.
+## 41                                            Can-Pack SA
+## 42                                                  Ando 
+## 43                                      Rekrutacja ukryta
+## 44                                    Grafton Recruitment
+## 45                                        TUnŻ WARTA S.A.
+## 46                                         B.P.O. Poland 
+## 47                                            Can-Pack SA
+## 48                              WELDSTAL sp. z o.o. sp.k.
+## 49                                          Tesco Polska 
+## 50                                          Tesco Polska 
+##                                                                              Lokalizacja
+## 1                                                                 Warszawa, mazowieckie 
+## 2                                                                      Gliwice, śląskie 
+## 3                                                                 Warszawa, mazowieckie 
+## 4                                                                 Poznań, wielkopolskie 
+## 5                                                                 Warszawa, mazowieckie 
+## 6                                   Bielany Wrocławskie (pow. wrocławski), dolnośląskie 
+## 7                                                                 Warszawa, mazowieckie 
+## 8                                             Warszawa (okolice), Zielonka, mazowieckie 
+## 9                                                                         Łódź, łódzkie 
+## 10                                            Warszawa (okolice), Zielonka, mazowieckie 
+## 11                                                                    Katowice, śląskie 
+## 12                                                                Warszawa, mazowieckie 
+## 13                                                         Szczecin, zachodniopomorskie 
+## 14                                                         Szczecin, zachodniopomorskie 
+## 15                                                               Ożarów, świętokrzyskie 
+## 16                                                                Warszawa, mazowieckie 
+## 17                                                           Kędzierzyn-Koźle, opolskie 
+## 18                                                                Warszawa, mazowieckie 
+## 19                 Bydgoszcz (okolice), Białe Błota (pow. bydgoski), kujawsko-pomorskie 
+## 20                                                                Warszawa, mazowieckie 
+## 21                                                                        Łódź, łódzkie 
+## 22                                                                Warszawa, mazowieckie 
+## 23                                                         Starogard Gdański, pomorskie 
+## 24                                                                Warszawa, mazowieckie 
+## 25                                                                Poznań, wielkopolskie 
+## 26  Ełk, Giżycko (okolice), Kętrzyn, Mikołajki, Mrągowo, Węgorzewo, warmińsko-mazurskie 
+## 27                                                     Burgdorf, Kreis Hannover, Niemcy 
+## 28                                                                Poznań, wielkopolskie 
+## 29                                     Poznań, Plewiska (pow. poznański), wielkopolskie 
+## 30                                                                Warszawa, mazowieckie 
+## 31                                                                    Sulęcin, lubuskie 
+## 32                                                               Bielsko-Biała, śląskie 
+## 33                                                                  Kraków, małopolskie 
+## 34                                                        Bydgoszcz, kujawsko-pomorskie 
+## 35                                                                    Jaworzno, śląskie 
+## 36                                                        Bielsko-Biała, Tychy, śląskie 
+## 37                                                         Koszalin, zachodniopomorskie 
+## 38                                                                Warszawa, mazowieckie 
+## 39                                                                  Kraków, małopolskie 
+## 40                                                              Wałbrzych, dolnośląskie 
+## 41                                                                Poznań, wielkopolskie 
+## 42                                                                  Kraków, małopolskie 
+## 43                                                                  Kraków, małopolskie 
+## 44                                                                  Kraków, małopolskie 
+## 45                                                                Warszawa, mazowieckie 
+## 46                                                                Wrocław, dolnośląskie 
+## 47                                                                Warszawa, mazowieckie 
+## 48                                                                                  &lt;NA&gt;
+## 49                                                                                  &lt;NA&gt;
+## 50                                                                                  &lt;NA&gt;
+##    Wynagrodzenie
+## 1          11863
+## 2          13707
+## 3           5323
+## 4           3648
+## 5           3734
+## 6          13228
+## 7           3704
+## 8           4694
+## 9           5005
+## 10          5790
+## 11          4086
+## 12          7622
+## 13          3788
+## 14          6433
+## 15          6788
+## 16          3680
+## 17          6844
+## 18          9649
+## 19         14255
+## 20          9438
+## 21          3018
+## 22         10085
+## 23          6032
+## 24         11766
+## 25         13740
+## 26         12326
+## 27         14883
+## 28          8039
+## 29          7451
+## 30         14151
+## 31         11933
+## 32         12401
+## 33         11733
+## 34         14069
+## 35          5142
+## 36         11969
+## 37          7750
+## 38         13157
+## 39          7607
+## 40          5637
+## 41            NA
+## 42            NA
+## 43            NA
+## 44            NA
+## 45            NA
+## 46            NA
+## 47            NA
+## 48            NA
+## 49            NA
+## 50            NA</code></pre>
+<pre class="r"><code>data</code></pre>
+<pre><code>##                                                                                                 Praca
+## 1                                                                                       PHP Developer
+## 2                                                                                       PHP Developer
+## 3                                                    Senior Statistician In Advanced Analytics (M/f) 
+## 4                                     Specjalista ds. controllingu i zarządzania ryzykiem operacyjnym
+## 5                                                                   Advanced Analytics Manager (M/f) 
+## 6                                                                                 Front-end developer
+## 7                                                                                  Teaching Assistant
+## 8                                                                            Administrative Assistant
+## 9                                                                                          Dyspozytor
+## 10                                                    Operator Wózka Widłowego – Pracownik Magazynowy
+## 11                                                       Front - end Developer - Digital Banking Area
+## 12                                                                                   Inżynier Procesu
+## 13                                                                                Key Account Manager
+## 14                                                            Specjalista ds. administracji sprzedaży
+## 15                                                             Manager ds. Sprzedaży Usług Medycznych
+## 16                                                Customer Service Advisor With Danish/swedish (M/f) 
+## 17                                                                                           Księgowa
+## 18                                                   Asystentka ds. Administracji i Koordynacji Biura
+## 19                                                                          Senior Laboratory Chemist
+## 20                                                  Architect (JAVA) Digital Solutions - Banking Area
+## 21                                                                                    Główny księgowy
+## 22                                                                                Senior Art Director
+## 23                                                   Starszy Konsultant Podatkowy - Doradca Podatkowy
+## 24       Specjalista ds. Planowania i Gospodarki Przestrzennej w Biurze Morskiej Energetyki Wiatrowej
+## 25                                                               Specjalista ds. Systemów Podłogowych
+## 26                                                                                         Sekretarka
+## 27                                                               Specjalista ds. Jakości i BHP (M/f) 
+## 28                                                               Kierowca - Serwisant transformatorów
+## 29 Przedstawiciel Handlowy ds. Samochodów Używanych ze znajomością języka serbskiego lub chorwackiego
+## 30                                                           Specjalista Utrzymania Ruchu - Automatyk
+## 31                                              Senior Engineer (Contact Centre Value Added Services)
+## 32                                                                      Javascript Frontend Developer
+## 33                                     Kierownik Zespołu Mobilnych Doradców ds. Pozyskiwania Klientów
+## 34                                                                            Przedstawiciel Handlowy
+## 35                                                                                Pracownik budowlany
+## 36                                                                    Monter Dźwigników Platformowych
+## 37                                                                        Doradca Techniczno-Handlowy
+## 38                                                           Specjalista ds. Produktów Inwestycyjnych
+## 39                                                   Inżynier ds. Zapewnienia Jakości Dostawców (SQA)
+## 40                                                                      Operator maszyn CNC - Stolarz
+## 41                                                                        Specjalista ds. podatkowych
+## 42                                                          Dyspozytor w transporcie międzynarodowym 
+## 43                                                                            Referent ds. inwestycji
+## 44                                                                       Inżynier procesu - technolog
+## 45                                  Regionalny Menadżer Sprzedaży Ubezpieczeń Indywidualnych na Życie
+## 46                                                                                  Junior Copywriter
+## 47                                                                           Specjalista ds. prawnych
+## 48                                                                                  Kontroler Jakości
+## 49                                                                                         Magazynier
+## 50                                                                         Specjalista ds. Rekrutacji
+##                                                     Firma
+## 1                                         EUVIC Sp. z o.o
+## 2                                         EUVIC Sp. z o.o
+## 3                                          Page Personnel
+## 4                                              mBank S.A.
+## 5                                        PageGroup Polska
+## 6                                                SkyGate 
+## 7                           The British School Sp. z o.o.
+## 8        Franklin Templeton Investments Poland Sp. z o.o.
+## 9                     Portmann Logistic Polska Sp. z o.o.
+## 10                                       Sonko Sp. z o.o.
+## 11                             EY (dawniej Ernst &amp; Young)
+## 12                           TRUMPF Huettinger Sp. z o.o.
+## 13                                                Kilargo
+## 14                           TRUMPF Huettinger Sp. z o.o.
+## 15                                     LUX MED Sp. z o.o.
+## 16                                         Page Personnel
+## 17 Instytut Pamięci Narodowej KŚZpNP Oddział w Szczecinie
+## 18                                    Omnicorp Sp. z o.o.
+## 19                                     CRH Lab Sp. z o.o.
+## 20                             EY (dawniej Ernst &amp; Young)
+## 21                                        CEWE Sp. z o.o.
+## 22                                         OS3 Sp. z o.o.
+## 23                                         Rödl &amp; Partner
+## 24                            PGE Energia Odnawialna S.A.
+## 25                                                  Knauf
+## 26                                  TOOLMAX Spółka z o.o.
+## 27                                         Page Personnel
+## 28                               ZREW Transformatory S.A.
+## 29                                KTS Holding Sp. z o.o. 
+## 30                          Barona HR Services Sp. z o.o.
+## 31                       Dimension Data Polska sp. z o.o.
+## 32                                  NaviExpert Sp. z o.o.
+## 33                                           Idea Bank SA
+## 34                        Mondelez International w Polsce
+## 35                            G&amp;W Servicegesellschaft mbH
+## 36                    Columbus McKinnon Polska Sp. z o.o.
+## 37                    Columbus McKINNON Polska Sp. z o.o.
+## 38                                           Idea Bank SA
+## 39                                             Devonshire
+## 40                                     Massoni Sp. z o.o.
+## 41                                            Can-Pack SA
+## 42                                                  Ando 
+## 43                                      Rekrutacja ukryta
+## 44                                    Grafton Recruitment
+## 45                                        TUnŻ WARTA S.A.
+## 46                                         B.P.O. Poland 
+## 47                                            Can-Pack SA
+## 48                              WELDSTAL sp. z o.o. sp.k.
+## 49                                          Tesco Polska 
+## 50                                          Tesco Polska 
+##                                                                              Lokalizacja
+## 1                                                                 Warszawa, mazowieckie 
+## 2                                                                      Gliwice, śląskie 
+## 3                                                                 Warszawa, mazowieckie 
+## 4                                                                 Poznań, wielkopolskie 
+## 5                                                                 Warszawa, mazowieckie 
+## 6                                   Bielany Wrocławskie (pow. wrocławski), dolnośląskie 
+## 7                                                                 Warszawa, mazowieckie 
+## 8                                             Warszawa (okolice), Zielonka, mazowieckie 
+## 9                                                                         Łódź, łódzkie 
+## 10                                            Warszawa (okolice), Zielonka, mazowieckie 
+## 11                                                                    Katowice, śląskie 
+## 12                                                                Warszawa, mazowieckie 
+## 13                                                         Szczecin, zachodniopomorskie 
+## 14                                                         Szczecin, zachodniopomorskie 
+## 15                                                               Ożarów, świętokrzyskie 
+## 16                                                                Warszawa, mazowieckie 
+## 17                                                           Kędzierzyn-Koźle, opolskie 
+## 18                                                                Warszawa, mazowieckie 
+## 19                 Bydgoszcz (okolice), Białe Błota (pow. bydgoski), kujawsko-pomorskie 
+## 20                                                                Warszawa, mazowieckie 
+## 21                                                                        Łódź, łódzkie 
+## 22                                                                Warszawa, mazowieckie 
+## 23                                                         Starogard Gdański, pomorskie 
+## 24                                                                Warszawa, mazowieckie 
+## 25                                                                Poznań, wielkopolskie 
+## 26  Ełk, Giżycko (okolice), Kętrzyn, Mikołajki, Mrągowo, Węgorzewo, warmińsko-mazurskie 
+## 27                                                     Burgdorf, Kreis Hannover, Niemcy 
+## 28                                                                Poznań, wielkopolskie 
+## 29                                     Poznań, Plewiska (pow. poznański), wielkopolskie 
+## 30                                                                Warszawa, mazowieckie 
+## 31                                                                    Sulęcin, lubuskie 
+## 32                                                               Bielsko-Biała, śląskie 
+## 33                                                                  Kraków, małopolskie 
+## 34                                                        Bydgoszcz, kujawsko-pomorskie 
+## 35                                                                    Jaworzno, śląskie 
+## 36                                                        Bielsko-Biała, Tychy, śląskie 
+## 37                                                         Koszalin, zachodniopomorskie 
+## 38                                                                Warszawa, mazowieckie 
+## 39                                                                  Kraków, małopolskie 
+## 40                                                              Wałbrzych, dolnośląskie 
+## 41                                                                Poznań, wielkopolskie 
+## 42                                                                  Kraków, małopolskie 
+## 43                                                                  Kraków, małopolskie 
+## 44                                                                  Kraków, małopolskie 
+## 45                                                                Warszawa, mazowieckie 
+## 46                                                                Wrocław, dolnośląskie 
+## 47                                                                Warszawa, mazowieckie 
+## 48                                                                                  &lt;NA&gt;
+## 49                                                                                  &lt;NA&gt;
+## 50                                                                                  &lt;NA&gt;
+##    Wynagrodzenie
+## 1          11863
+## 2          13707
+## 3           5323
+## 4           3648
+## 5           3734
+## 6          13228
+## 7           3704
+## 8           4694
+## 9           5005
+## 10          5790
+## 11          4086
+## 12          7622
+## 13          3788
+## 14          6433
+## 15          6788
+## 16          3680
+## 17          6844
+## 18          9649
+## 19         14255
+## 20          9438
+## 21          3018
+## 22         10085
+## 23          6032
+## 24         11766
+## 25         13740
+## 26         12326
+## 27         14883
+## 28          8039
+## 29          7451
+## 30         14151
+## 31         11933
+## 32         12401
+## 33         11733
+## 34         14069
+## 35          5142
+## 36         11969
+## 37          7750
+## 38         13157
+## 39          7607
+## 40          5637
+## 41            NA
+## 42            NA
+## 43            NA
+## 44            NA
+## 45            NA
+## 46            NA
+## 47            NA
+## 48            NA
+## 49            NA
+## 50            NA</code></pre>
+
+
+
+
+</div>
